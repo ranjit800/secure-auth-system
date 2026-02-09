@@ -131,10 +131,8 @@ router.get('/verify-email/:token', async (req, res) => {
     });
 
     if (!tokenDoc) {
-      return res.status(400).json({
-        success: false,
-        message: 'Invalid or expired verification token'
-      });
+      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+      return res.redirect(`${frontendUrl}/login?verified=false&error=invalid-token`);
     }
 
     // Mark token as used
@@ -146,10 +144,9 @@ router.get('/verify-email/:token', async (req, res) => {
       isEmailVerified: true
     });
 
-    res.status(200).json({
-      success: true,
-      message: 'Email verified successfully! You can now log in.'
-    });
+    // Redirect to frontend login page with success message
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+    res.redirect(`${frontendUrl}/login?verified=true`);
 
   } catch (error) {
     console.error('Email verification error:', error);
