@@ -14,6 +14,7 @@ interface AuthStore {
     login: (email: string, password: string) => Promise<void>;
     register: (email: string, password: string) => Promise<{ verificationToken?: string }>;
     logout: () => Promise<void>;
+    logoutAll: () => Promise<void>;
     checkAuth: () => Promise<void>;
 }
 
@@ -53,6 +54,11 @@ export const useAuthStore = create<AuthStore>((set) => ({
 
     logout: async () => {
         await authAPI.logout();
+        set({ user: null });
+    },
+
+    logoutAll: async () => {
+        await authAPI.logoutAll();
         set({ user: null });
     },
 }));

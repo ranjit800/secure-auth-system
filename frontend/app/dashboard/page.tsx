@@ -60,7 +60,8 @@ export default function DashboardPage() {
     if (!confirm('Are you sure you want to logout from all devices?')) return;
 
     try {
-      await logout();
+    try {
+      await require('@/store/useAuthStore').useAuthStore.getState().logoutAll();
       router.push('/login');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to logout');
