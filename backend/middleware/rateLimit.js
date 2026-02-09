@@ -3,7 +3,8 @@ const rateLimit = require('express-rate-limit');
 // Helper function to get human-readable time remaining
 const getTimeRemaining = (resetTime) => {
   const now = Date.now();
-  const msRemaining = resetTime - now;
+  const resetTimeMs = resetTime * 1000; // Convert seconds to milliseconds
+  const msRemaining = resetTimeMs - now;
   const minutesRemaining = Math.ceil(msRemaining / 60000);
   
   if (minutesRemaining < 1) {
