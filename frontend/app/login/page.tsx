@@ -1,21 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
-export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+// Separate component for search params to fix Vercel build
+function VerificationMessage() {
   const [success, setSuccess] = useState('');
-  const [loading, setLoading] = useState(false);
-  const login = useAuthStore((state) => state.login);
-  const router = useRouter();
+  const [error, setError] = useState('');
   const searchParams = useSearchParams();
 
-  // Check for verification status in URL
   useEffect(() => {
     const verified = searchParams.get('verified');
     const errorParam = searchParams.get('error');
@@ -28,6 +23,31 @@ export default function LoginPage() {
       }
     }
   }, [searchParams]);
+
+  return (
+    <>
+      {error && (
+        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          {error}
+        </div>
+      )}
+
+      {success && (
+        <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+          {success}
+        </div>
+      )}
+    </>
+  );
+}
+
+export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const login = useAuthStore((state) => state.login);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,15 +71,13 @@ export default function LoginPage() {
           Login to Your Account
         </h2>
 
+        <Suspense fallback={null}>
+          <VerificationMessage />
+        </Suspense>
+
         {error && (
           <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
             {error}
-          </div>
-        )}
-
-        {success && (
-          <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
-            {success}
           </div>
         )}
 
