@@ -61,7 +61,7 @@ export default function RegisterPage() {
       <div className="hidden lg:block w-1/2 relative overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/Heromiage.jpg')" }}
+          style={{ backgroundImage: "url('/Heromiage.webp')" }}
         >
           {/* Overlay to ensure text readability if we add text back later, currently just image */}
           <div className="absolute inset-0 bg-black/10"></div>
