@@ -44,59 +44,90 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-2">
-          Forgot Password?
-        </h2>
-        <p className="text-center text-gray-600 mb-8">
-          Enter your email and we'll send you a reset link
-        </p>
-
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-            {error}
+    <div className="flex min-h-screen bg-white font-sans">
+      {/* Left Section - Hero Image */}
+      <div className="hidden lg:block w-1/2 relative overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/Heromiage.webp')" }}
+        >
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/10"></div>
+        </div>
+        
+        {/* Welcome Text overlay on image */}
+        <div className="relative z-10 p-12 h-full flex flex-col justify-end text-white">
+          <div className="mb-20 animate-fade-in-up">
+            <h2 className="text-6xl font-bold leading-tight drop-shadow-lg text-shadow">
+              Reset Password
+            </h2>
+            <p className="mt-4 text-white text-lg max-w-md drop-shadow-md text-shadow">
+              Securely recover your account access.
+            </p>
           </div>
-        )}
+        </div>
+      </div>
 
-        {success && (
-          <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
-            ✅ {success}
-            <p className="text-sm mt-2">Redirecting to login in 5 seconds...</p>
+      {/* Right Section - White Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16 bg-white relative">
+        <div className="w-full max-w-md space-y-8">
+          <div className="text-center lg:text-left">
+            <h2 className="text-4xl font-bold text-gray-900 mb-2">Forgot Password?</h2>
+            <p className="text-gray-500">Enter your email and we'll send you a reset link.</p>
           </div>
-        )}
 
-        {!success && (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                placeholder="you@example.com"
-              />
+          {error && (
+            <div className="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg animate-pulse">
+              {error}
             </div>
+          )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+          {success && (
+            <div className="p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-lg">
+              <div className="font-semibold mb-1">✅ Email Sent</div>
+              {success}
+              <p className="text-sm mt-2 text-green-800">Redirecting to login in 5 seconds...</p>
+            </div>
+          )}
+
+          {!success && (
+            <form onSubmit={handleSubmit} className="space-y-6 mt-8">
+              <div className="space-y-1">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  Email Address
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full px-4 py-3 bg-gray-100 border-none rounded-lg focus:ring-2 focus:ring-black focus:bg-white transition-all duration-200 outline-none placeholder-gray-400"
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-black text-white py-3.5 rounded-full font-bold text-lg hover:bg-gray-800 transform hover:scale-[1.02] transition-all duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
+              >
+                {loading ? 'Sending Link...' : 'Send Reset Link'}
+              </button>
+            </form>
+          )}
+
+          <div className="text-center mt-6">
+            <Link 
+              href="/login" 
+              className="text-gray-500 hover:text-black hover:underline transition-colors font-medium flex items-center justify-center gap-2"
             >
-              {loading ? 'Sending...' : 'Send Reset Link'}
-            </button>
-          </form>
-        )}
-
-        <div className="mt-6 text-center">
-          <Link href="/login" className="text-sm text-indigo-600 hover:text-indigo-800">
-            ← Back to Login
-          </Link>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+              </svg>
+              Back to Login
+            </Link>
+          </div>
         </div>
       </div>
     </div>
