@@ -31,6 +31,18 @@ const loginLimiter = rateLimit({
   legacyHeaders: false,
   handler: (req, res) => {
     const resetTime = parseInt(res.getHeader('RateLimit-Reset'));
+    const now = Date.now();
+    const resetTimeMs = resetTime * 1000;
+    
+    // Debug logging
+    console.log('Rate Limit Debug:', {
+      resetTime,
+      resetTimeMs,
+      now,
+      diff: resetTimeMs - now,
+      minutes: Math.ceil((resetTimeMs - now) / 60000)
+    });
+    
     const timeRemaining = getTimeRemaining(resetTime);
     
     res.status(429).json({
