@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -316,18 +317,23 @@ router.post('/logout', authMiddleware, async (req, res) => {
 // @access  Private
 router.post('/logout-all', authMiddleware, async (req, res) => {
   try {
+    const userId = new mongoose.Types.ObjectId(req.userId);
+
     // Mark all user's sessions as inactive
-    await Session.updateMany(
-      { userId: req.userId, isActive: true },
+    const result = await Session.updateMany(
+      { userId: userId, isActive: true },
       { isActive: false }
     );
+
+    console.log(`Logout all: Invalidated ${result.modifiedCount} sessions for user ${req.userId}`);
 
     // Clear cookie
     res.clearCookie('token');
 
     res.status(200).json({
       success: true,
-      message: 'Logged out from all devices successfully'
+      message: 'Logged out from all devices successfully',
+      count: result.modifiedCount
     });
 
   } catch (error) {
