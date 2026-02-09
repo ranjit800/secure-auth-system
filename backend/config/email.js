@@ -37,7 +37,7 @@ const sendVerificationEmail = async (email, token) => {
           <div class="content">
             <h2>Verify Your Email Address</h2>
             <p>Thank you for registering! Please click the button below to verify your email address:</p>
-            <a href="${verificationUrl}" class="button">Verify Email</a>
+            <a href="${verificationUrl}" class="button" style="color: white !important; text-decoration: none;">Verify Email</a>
             <p>Or copy and paste this link in your browser:</p>
             <p style="word-break: break-all; color: #4F46E5;">${verificationUrl}</p>
             <p style="margin-top: 30px; color: #666;">This link will expire in 24 hours.</p>
@@ -97,7 +97,7 @@ const sendPasswordResetEmail = async (email, token) => {
           <div class="content">
             <h2>Reset Your Password</h2>
             <p>You requested to reset your password. Click the button below to proceed:</p>
-            <a href="${resetUrl}" class="button">Reset Password</a>
+            <a href="${resetUrl}" class="button" style="color: white !important; text-decoration: none;">Reset Password</a>
             <p>Or copy and paste this link in your browser:</p>
             <p style="word-break: break-all; color: #DC2626;">${resetUrl}</p>
             <p style="margin-top: 30px; color: #666;">This link will expire in 1 hour.</p>
