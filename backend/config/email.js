@@ -16,7 +16,8 @@ const createTransporter = () => {
 // Send verification email
 const sendVerificationEmail = async (email, token) => {
   const transporter = createTransporter();
-  const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${token}`;
+  const backendUrl = process.env.BACKEND_URL || 'https://secure-auth-system-s6ez.onrender.com';
+  const verificationUrl = `${backendUrl}/api/auth/verify-email/${token}`;
 
   const mailOptions = {
     from: `"Secure Auth System" <${process.env.EMAIL_USER}>`,
