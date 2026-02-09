@@ -7,7 +7,7 @@ sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 const sendVerificationEmail = async (email, token) => {
   const backendUrl = process.env.BACKEND_URL || 'https://secure-auth-system-s6ez.onrender.com';
   const verificationUrl = `${backendUrl}/api/auth/verify-email/${token}`;
-  const fromEmail = process.env.FROM_EMAIL || 'rjranjit009@gmail.com';
+  const fromEmail = process.env.FROM_EMAIL || 'rjranjit099@gmail.com';
 
   const msg = {
     to: email,
@@ -67,7 +67,7 @@ const sendVerificationEmail = async (email, token) => {
 // Send password reset email
 const sendPasswordResetEmail = async (email, token) => {
   const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
-  const fromEmail = process.env.FROM_EMAIL || 'rjranjit009@gmail.com';
+  const fromEmail = process.env.FROM_EMAIL || 'rjranjit099@gmail.com';
 
   const msg = {
     to: email,
