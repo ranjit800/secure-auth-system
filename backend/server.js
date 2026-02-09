@@ -10,6 +10,9 @@ const dashboardRoutes = require('./routes/dashboard');
 
 const app = express();
 
+// Trust proxy - Required for Render/Railway/Heroku behind reverse proxy
+app.set('trust proxy', 1);
+
 // Connect to MongoDB
 connectDB();
 
