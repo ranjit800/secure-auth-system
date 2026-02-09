@@ -33,9 +33,17 @@ app.use(cors({
     // Allow requests with no origin (mobile apps, Postman, etc.)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.includes(origin)) {
+    // Allow simple requests from local network (dev mode)
+    // Checks for 192.168.x.x, 10.x.x.x, 172.x.x.x
+    if (
+      origin.startsWith('http://192.168.') ||
+      origin.startsWith('http://10.') ||
+      origin.startsWith('http://172.') ||
+      allowedOrigins.includes(origin)
+    ) {
       callback(null, true);
     } else {
+      console.log('Blocked by CORS:', origin); // Debug log
       callback(new Error('Not allowed by CORS'));
     }
   },
