@@ -7,7 +7,7 @@ import { Session } from '@/types';
 import { useRouter } from 'next/navigation';
 
 export default function DashboardPage() {
-  const { user, loading, logout, checkAuth } = useAuthStore();
+  const { user, loading, logout, logoutAll, checkAuth } = useAuthStore();
   const [sessions, setSessions] = useState<Session[]>([]);
   const [currentSessionId, setCurrentSessionId] = useState('');
   const [loadingSessions, setLoadingSessions] = useState(true);
@@ -60,8 +60,7 @@ export default function DashboardPage() {
     if (!confirm('Are you sure you want to logout from all devices?')) return;
 
     try {
-    try {
-      await require('@/store/useAuthStore').useAuthStore.getState().logoutAll();
+      await logoutAll();
       router.push('/login');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to logout');
