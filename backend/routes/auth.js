@@ -238,10 +238,14 @@ router.post('/login', loginLimiter, async (req, res) => {
     );
 
     // Set HTTP-only cookie
+    // Note: For localhost development with deployed backend, we use sameSite: 'none' with secure: true
+    // This allows cookies to work across origins (localhost -> Render)
+    const isProduction = process.env.NODE_ENV === 'production';
+    
     res.cookie('token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-      sameSite: 'strict',
+      secure: true, // Always true for sameSite: 'none' to work
+      sameSite: 'none', // Allow cross-origin cookies (localhost -> deployed backend)
       maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     });
 
