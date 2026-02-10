@@ -25,7 +25,7 @@ This is the backend server for the Secure Authentication System, built with **No
 - **Database**: MongoDB with Mongoose ODM
 - **Authentication**: JWT (jsonwebtoken)
 - **Password Hashing**: bcrypt
-- **Email Service**: Nodemailer
+- **Email Service**: SendGrid (HTTP API)
 - **Security**: express-rate-limit, HTTP-only cookies
 
 ---
@@ -34,9 +34,9 @@ This is the backend server for the Secure Authentication System, built with **No
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v18 or higher)
 - MongoDB (local or cloud instance)
-- Gmail account (or other SMTP service) for email
+- SendGrid Account (for transactional emails)
 
 ### Steps
 
@@ -44,6 +44,7 @@ This is the backend server for the Secure Authentication System, built with **No
    ```bash
    npm install
    ```
+   *(Note: Ensure `@sendgrid/mail` is installed)*
 
 2. **Configure environment variables**:
    - Copy `.env.example` to `.env`
@@ -58,6 +59,8 @@ This is the backend server for the Secure Authentication System, built with **No
 4. **Start the server**:
    ```bash
    npm start
+   # Or for development with auto-restart:
+   npm run dev
    ```
 
    The server will start on `http://localhost:5000`
@@ -77,14 +80,12 @@ NODE_ENV=development
 MONGODB_URI=mongodb://localhost:27017/secure-auth-system
 
 # JWT
-JWT_SECRET=your-super-secret-jwt-key-change-this
+JWT_SECRET=your-super-secret-jwt-key
 JWT_EXPIRES_IN=7d
 
-# Email (Gmail example)
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASSWORD=your-gmail-app-password
+# Email (SendGrid)
+SENDGRID_API_KEY=SG.your_sendgrid_api_key
+FROM_EMAIL=your-verified-sender@example.com
 
 # Frontend
 FRONTEND_URL=http://localhost:3000
@@ -404,6 +405,6 @@ This project is for internship evaluation purposes.
 
 ## 👤 Author
 
-Created by: **[Your Name]**  
+Created by: Ranjit Jana  
 Assignment for: **Kalp Intelligence Internship**  
 Evaluator: **Aman Sharma**
