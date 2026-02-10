@@ -101,6 +101,11 @@ export default function LoginPage() {
             <p className="text-gray-500">Welcome back! Please enter your details.</p>
           </div>
 
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800">
+            <span className="font-bold">⚠️ Note:</span> The backend is hosted on a free tier. 
+            The first request may take <span className="font-bold">50-60 seconds</span> to allow the server to wake up.
+          </div>
+
           <Suspense fallback={null}>
             <VerificationMessage />
           </Suspense>

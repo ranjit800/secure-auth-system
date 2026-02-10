@@ -92,6 +92,11 @@ export default function RegisterPage() {
             <p className="text-gray-500">Create your account to get started.</p>
           </div>
 
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800">
+            <span className="font-bold">⚠️ Note:</span> The backend is hosted on a free tier. 
+            The first request may take <span className="font-bold">50-60 seconds</span> to allow the server to wake up.
+          </div>
+
           {error && (
             <div className="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg animate-pulse">
               {error}

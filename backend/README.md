@@ -123,15 +123,15 @@ CORS_ORIGIN=http://localhost:3000
 
 ### Dashboard Routes (`/api/dashboard`)
 
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/` | Get dashboard data | Yes |
+| Method | Endpoint | Description   | Auth Required |
+|--------|----------|---------------|---------------|
+| GET    | `/` | Get dashboard data | Yes |
 
 ### Health Check
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | Server health check |
+| Method | Endpoint      | Description        |
+|--------|---------------|--------------------|
+| GET    | `/api/health` | Server health check
 
 ---
 

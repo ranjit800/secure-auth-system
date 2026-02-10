@@ -21,8 +21,13 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 text-center">
+        <div className="text-xl font-semibold mb-2">Loading...</div>
+        <p className="text-gray-500 max-w-md text-sm">
+          ⚠️ Note: The backend is hosted on Render's Free Tier. 
+          The first request may take <span className="font-bold text-gray-700">50-60 seconds</span> to wake up the server. 
+          Please be patient! ⏳
+        </p>
       </div>
     );
   }
